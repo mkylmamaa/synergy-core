@@ -57,6 +57,8 @@ SerialKey::SerialKey(std::string serial) :
 bool
 SerialKey::isExpiring(time_t currentTime) const
 {
+return false;
+
     bool result = false;
 
     if (isTemporary()) {
@@ -72,6 +74,8 @@ SerialKey::isExpiring(time_t currentTime) const
 bool
 SerialKey::isExpired(time_t currentTime) const
 {
+return false;
+
     bool result = false;
 
     if (isTemporary()) {
@@ -87,18 +91,21 @@ SerialKey::isExpired(time_t currentTime) const
 bool
 SerialKey::isTrial() const
 {
+return false;
     return m_KeyType.isTrial();
 }
 
 bool
 SerialKey::isTemporary() const
 {
+return false;
     return m_KeyType.isTemporary();
 }
 
 bool
 SerialKey::isValid() const
 {
+return true;
     bool Valid = true;
 
     if (m_edition.getType() == kUnregistered || isExpired(::time(0)))
@@ -112,6 +119,7 @@ SerialKey::isValid() const
 Edition
 SerialKey::edition() const
 {
+return kPro;
     return m_edition.getType();
 }
 
@@ -157,6 +165,7 @@ SerialKey::toString() const
 time_t
 SerialKey::daysLeft(time_t currentTime) const
 {
+return 9999;
     unsigned long long timeLeft =  0;
     unsigned long long const day = 60 * 60 * 24;
 
@@ -174,6 +183,7 @@ SerialKey::daysLeft(time_t currentTime) const
 int
 SerialKey::getSpanLeft(time_t time) const
 {
+return INT_MAX;
     int result{-1};
 
     if (isTemporary() && !isExpired(time)){
@@ -193,12 +203,14 @@ SerialKey::getSpanLeft(time_t time) const
 std::string
 SerialKey::email() const
 {
+return "hax@hax.com";
     return m_email;
 }
 
 std::string
 SerialKey::decode(const std::string& serial)
 {
+return "HAX";
     static const char* const lut = "0123456789ABCDEF";
     string output;
     size_t len = serial.length();
@@ -228,6 +240,7 @@ SerialKey::decode(const std::string& serial)
 bool
 SerialKey::parse(std::string plainSerial)
 {
+return true;
     string parityStart = plainSerial.substr(0, 1);
     string parityEnd = plainSerial.substr(plainSerial.length() - 1, 1);
 
